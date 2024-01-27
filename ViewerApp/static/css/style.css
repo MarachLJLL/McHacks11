@@ -20,22 +20,29 @@
         width: 100%; 
         padding: 30px 100px;             
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center; 
         z-index: 100;
         
 }
 
     .logo{
-        font-size:2em;
+        font-size:2.5em;
         color: #359381;
         pointer-events: none;
-        margin-right: 450px;
+        /* margin-right: 450px; */
 }
+
+    .navigation {
+        margin-left: auto; 
+        margin-right: 30px;
+        font-size: 25px;
+        
+    }
 
     .navigation a {
         text-decoration: none;
-        color: #359381;
+        color: #fff;
         padding: 6px 15px;
         border-radius: 20px;
         margin: 0 10px;
