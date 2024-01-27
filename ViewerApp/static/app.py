@@ -1,16 +1,12 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
-
+from classes import db, Device, EnergyConsumption, User
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
-db = SQLAlchemy(app)
+db.init_app(app)
 app.secret_key = 'ilsr' 
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    password = db.Column(db.String(100)) 
 
 with app.app_context():
     @app.route('/')
