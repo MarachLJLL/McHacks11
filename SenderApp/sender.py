@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 import tkinter as tk
 from tkinter import simpledialog
+import time
 
 def calcEnergy():
     return 9001
@@ -32,11 +33,14 @@ if __name__ == "__main__":
 
     while not logged_in:
         username, password = get_credentials()
-        path = "login?username=" + username + ""
+        path = "login?username=" + username + "?password=" + password
         responce = requests.get(baseurl + path)
-        logged_in = True
-
-    data = getData()
-    path = "create-dp"
-    responce = requests.post(baseurl + path, json=data)
-    print(responce.text)
+        if responce.status_code == 200:
+            logged_in = True
+    
+    while True:
+        data = getData()
+        path = "create-dp"
+        responce = requests.post(baseurl + path, json=data)
+        print(responce.text)
+        time.sleep(5 * 60)

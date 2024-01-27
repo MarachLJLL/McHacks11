@@ -22,9 +22,12 @@ def get_user(uid):
         user_data["extra"] = extra
     return jsonify(user_data), 201
 
-@app.route("/login/", methods=["GET"])
+@app.route("/login", methods=["GET"])
 def login():
-    return True
+    username = request.args.get("username")
+    password = request.args.get("password")
+    return 200
+    
 
 @app.route("/create-dp", methods=["POST"])
 def create_dp():
