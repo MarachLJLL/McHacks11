@@ -22,15 +22,7 @@ def get_user(uid):
 
     
 
-@app.route("/create-dp", methods=["POST"])
-def create_dp():
-    # if request.method == "POST":
-    data = request.get_json()
-        
-    # implement adding the data into the database
-    print(data)
-    
-    return jsonify(data), 201
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session
+from flask import Flask, render_template, request, redirect, session, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, Device, EnergyConsumption, User
 import jsonify
@@ -40,18 +40,19 @@ with app.app_context():
         else:
             error = "Username already exists please try again."
             return render_template("signup.html", error = error)
-    @app.route('/login-app', methods=['GET'])
+    @app.route('/login-app', methods=['GET', 'POST'])
     def verify():
-        print('entering login')
+        
         username = request.args.get("username")
         password = request.args.get("password")
         user = User.query.filter_by(name=username, password=password).first()
+        print(username)
+        print(password)
         if user:
-            print("right password")
-            return jsonify(username), 200
+            return '', 200
         else: 
-            print ("wrong password")
-            return jsonify(username), 201
+            return '', 201
+
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         
@@ -75,6 +76,15 @@ with app.app_context():
         session.pop('name', None)
         return "Logged out, session ended."
 
+    @app.route("/create-dp", methods=["POST"])
+    def create_dp():
+        # if request.method == "POST":
+        data = request.get_json()
+            
+        # implement adding the data into the database
+        print(data)
+    
+        return jsonify(data), 201
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)

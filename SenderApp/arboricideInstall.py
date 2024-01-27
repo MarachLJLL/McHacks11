@@ -22,7 +22,7 @@ def install_energy_tracker():
     subprocess.run(["crontab", "cron-new"])
     subprocess.run(["rm", "cron-new"])
 
-    print("Energy tracker installed and cron job set up successfully.")
+    #can find the necessary file in local file ~/Library/Caches/energy-tracker/energy-log.txt
 
 if __name__ == "__main__":
     install_energy_tracker()
