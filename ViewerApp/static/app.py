@@ -5,18 +5,23 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
 db = SQLAlchemy(app)
-
 app.secret_key = 'ilsr' 
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
     password = db.Column(db.String(100)) 
 
-
 with app.app_context():
     @app.route('/')
     def index():
-        return render_template('index.html')
+        logged_in = session.get('logged_in', False)
+        if logged_in:
+            users = User.query.all()
+            return render_template('test.html', users = users)
+        else:
+            return render_template('index.html')
+
     @app.route('/signup')
     def signup():
         return render_template('signup.html')
@@ -55,6 +60,11 @@ with app.app_context():
                 return render_template('login.html', error=error)
 
         return render_template('login.html')
+    @app.route('/logout')
+    def logout():
+        session.pop('logged_in', None)
+        session.pop('name', None)
+        return "Logged out, session ended."
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)
