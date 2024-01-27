@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, Device, EnergyConsumption, User
+import jsonify
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -39,9 +40,21 @@ with app.app_context():
         else:
             error = "Username already exists please try again."
             return render_template("signup.html", error = error)
-
+    @app.route('/login-app', methods=['GET'])
+    def verify():
+        print('entering login')
+        username = request.args.get("username")
+        password = request.args.get("password")
+        user = User.query.filter_by(name=username, password=password).first()
+        if user:
+            print("right password")
+            return jsonify(username), 200
+        else: 
+            print ("wrong password")
+            return jsonify(username), 201
     @app.route('/login', methods=['GET', 'POST'])
     def login():
+        
         if request.method == 'POST':
             username = request.form['username']
             password = request.form['password']
@@ -61,7 +74,7 @@ with app.app_context():
         session.pop('logged_in', None)
         session.pop('name', None)
         return "Logged out, session ended."
-        
+
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)

@@ -34,7 +34,8 @@ if __name__ == "__main__":
     while not logged_in:
         username, password = get_credentials()
         path = "login?username=" + username + "?password=" + password
-        responce = requests.get(baseurl + path)
+        
+        responce = requests.get("http://127.0.0.1:5000/login-app")
         if responce.status_code == 200:
             logged_in = True
     
@@ -42,5 +43,4 @@ if __name__ == "__main__":
         data = getData()
         path = "create-dp"
         responce = requests.post(baseurl + path, json=data)
-        print(responce.text)
         time.sleep(5 * 60)

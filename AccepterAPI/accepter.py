@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from classes import db, Device, EnergyConsumption, User
 
 app = Flask(__name__)
 
@@ -20,13 +19,7 @@ def get_user(uid):
         user_data["extra"] = extra
     return jsonify(user_data), 201
 
-@app.route("/login", methods=["GET"])
-def login():
-    username = request.args.get("username")
-    password = request.args.get("password")
 
-    return 200
-# if not valid return 201 code
     
 
 @app.route("/create-dp", methods=["POST"])
