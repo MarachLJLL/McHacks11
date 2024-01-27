@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from classes import db, Device, EnergyConsumption, User
+from classes import db, User, DP
 import jsonify
 app = Flask(__name__)
 
@@ -80,7 +80,7 @@ with app.app_context():
     def create_dp():
         # if request.method == "POST":
         data = request.get_json()
-        
+
         return '', 201
     if __name__ == '__main__':
             db.create_all() 

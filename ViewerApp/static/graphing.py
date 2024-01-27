@@ -1,14 +1,19 @@
 from datetime import datetime, timedelta
 
-def getTimes(user):
+def getDevices(user):
+    devicesList = []
+    return devicesList
+
+def getTimes(device):
     times_list = []
     return times_list
 
-def getEnergies(user):
+def getEnergies(device):
     energies_list = []
     return energies_list
 
 def getGraphHtml(user):
+    devices = getDevices(user)
     times_lists = []
     energy_lists = []
     getTimes(device)
@@ -25,7 +30,7 @@ def getGraphHtml(user):
         time_intervals.append(current_time)
         current_time += timedelta(minutes=5)
 
-    
+
 
     
     
