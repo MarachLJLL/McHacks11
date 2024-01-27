@@ -1,13 +1,11 @@
 from flask import Flask, request, jsonify
+from classes import db, Device, EnergyConsumption, User
 
 app = Flask(__name__)
 
-
-'''
-@app.route("/")
-def home():
-    return "Home"
-'''
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
+db.init_app(app)
+app.secret_key = 'ilsr' 
 
 @app.route("/get-user/<uid>")
 def get_user(uid):
@@ -26,7 +24,9 @@ def get_user(uid):
 def login():
     username = request.args.get("username")
     password = request.args.get("password")
+
     return 200
+# if not valid return 201 code
     
 
 @app.route("/create-dp", methods=["POST"])
