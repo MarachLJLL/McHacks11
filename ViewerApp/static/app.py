@@ -40,18 +40,16 @@ with app.app_context():
         else:
             error = "Username already exists please try again."
             return render_template("signup.html", error = error)
-    @app.route('/login-app', methods=['GET'])
+    @app.route('/login-app', methods=['GET', 'POST'])
     def verify():
-        print('entering login')
         username = request.args.get("username")
         password = request.args.get("password")
         user = User.query.filter_by(name=username, password=password).first()
         if user:
-            print("right password")
-            return jsonify(username), 200
+            return 200
         else: 
-            print ("wrong password")
-            return jsonify(username), 201
+            return 201
+
     @app.route('/login', methods=['GET', 'POST'])
     def login():
         

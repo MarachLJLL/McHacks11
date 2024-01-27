@@ -33,12 +33,12 @@ if __name__ == "__main__":
 
     while not logged_in:
         username, password = get_credentials()
-        path = "login?username=" + username + "?password=" + password
+        path = "login-app?username=" + username + "&password=" + password
         
-        responce = requests.get("http://127.0.0.1:5000/login-app")
+        responce = requests.get(baseurl + path)
         if responce.status_code == 200:
             logged_in = True
-    
+        
     while True:
         data = getData()
         path = "create-dp"
