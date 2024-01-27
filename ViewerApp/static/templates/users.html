@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<body>
+    <div class="row">
+        {% for user in users %}
+            <div class="user">
+                <p><strong>{{ user.name }}</strong></p>
+                <p><strong>{{ user.password }} </strong></p>
+            </div>
+        {% endfor %}
+    </div>
+</body>
