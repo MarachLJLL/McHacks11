@@ -15,8 +15,10 @@ with app.app_context():
     def index():
         logged_in = session.get('logged_in', False)
         if logged_in:
-            users = User.query.all()
-            return render_template('index.html', users = users)
+            g = Graph(session["name"])
+            graph_html = g.kwh_g
+
+            return render_template('graphing.html', graph_html=graph_html, g = g)
         else:
             return render_template('index.html')
 
@@ -37,8 +39,10 @@ with app.app_context():
             session['name'] = name
             session['logged_in'] = True
      
-            users = User.query.all()
-            return redirect('index.html')
+            g = Graph(session["name"])
+            graph_html = g.kwh_g
+
+            return render_template('graphing.html', graph_html=graph_html, g = g)
         else:
             error = "Username already exists please try again."
             return render_template("index.html", error = error)
@@ -64,11 +68,13 @@ with app.app_context():
             if user:
                 session['name'] = username
                 session['logged_in'] = True
-                print(session['name'])
-                return redirect("index.html"))
+                g = Graph(session["name"])
+                graph_html = g.kwh_g
+
+                return render_template('graphing.html', graph_html=graph_html, g = g)
             else:
                 error = "Invalid username or password. Please try again."
-                return render_template('login.html', error=error)
+                return render_template('index.html', error=error)
 
         return render_template('login.html')
     @app.route('/logout')
