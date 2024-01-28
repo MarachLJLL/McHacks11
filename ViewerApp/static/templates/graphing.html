@@ -6,6 +6,18 @@
 </head>
 <body>
     <div class="graph">{{ graph_html|safe }}</div>
+    <table border="1">
+        <tr>
+            <th>kWh</th>
+            <th>Trees Killed</th>
+            <th>Cost</th>
+            <!-- Add more columns as needed -->
+        </tr>
+            <td>{{ g.kwh_t }}</td>
+            <td>{{ g.treesKilled_t }}</td>
+            <td>${{ g.cost_t }}</td>
+            <!-- Add more columns as needed -->
 
+    </table>
 </body>
 </html>

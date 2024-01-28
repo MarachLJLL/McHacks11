@@ -129,11 +129,18 @@ with app.app_context():
     @app.route("/graph")
     def graph():
         g = Graph(session["name"])
-        return g.kwh_g
+        graph_html = g.kwh_g
+
+        return render_template('graphing.html', graph_html=graph_html, g = g)
+    
+    @app.route("/stats")
+    def stats():
+        g = Graph(session["name"])
+        return render_template("/stats.html", g = g)
+
     @app.route("/show")
     def route():
         users = User.query.all()
-        
         return render_template("/show.html", users = users)
 
     if __name__ == '__main__':

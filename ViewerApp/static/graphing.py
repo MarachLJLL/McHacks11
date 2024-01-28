@@ -38,7 +38,7 @@ class Graph():
                 appended = False
                 for ci in ci_list:
                     if ci.time == time:
-                        ylist.append(func(ci)) 
+                        ylist.append(func(ci))
                         appended = True
                 if not appended:
                     ylist.append(None)                   
@@ -47,7 +47,7 @@ class Graph():
         fig.update_layout(title='', xaxis_title='Time', yaxis_title=value_name)
         graph_html = plot(fig, output_type='div', include_plotlyjs=False)
 
-        return render_template('graphing.html', graph_html=graph_html)
+        return graph_html
     
     def getTotal(self, func):
         total = 0
