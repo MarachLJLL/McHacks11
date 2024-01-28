@@ -10,6 +10,15 @@ class User(db.Model):
     device_id = db.Column(db.String(100))
     time = db.Column(db.DateTime)
     energy = db.Column(db.Float)
+
+# timestamp, kWHours, treesKilled, costDollars, userId (device id)
+class ConsumptionInfo():
+    def __init__(self, time, kwh, treesKilled, cost):
+        self.time = time #datetime
+        self.kwh = kwh #float
+        self.treesKilled = treesKilled #float
+        self.cost = cost #float
+        
     
 
 

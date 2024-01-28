@@ -1,7 +1,12 @@
 from classes import db, User, DP
 
 def getDevices(user):
-    devicesList = []
+    """
+    return dictionary: {
+     device name:[consumption_info,]
+    }
+    """
+    devices = {}
     # get all entries for this user
     # have a Counter() for all of the devices
     # set devicesList to the keys of the Counter()
@@ -15,10 +20,4 @@ def convertTimeToDatetime(str):
     minute = 1
     return datetime(year=year, month=month, day=day, hour=hour, minute=minute)
 
-def getTimes(device):
-    times_list = []
-    return times_list
 
-def getEnergies(device):
-    energies_list = []
-    return energies_list
