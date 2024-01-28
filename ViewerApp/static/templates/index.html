@@ -7,16 +7,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Arboricide Analytics</title>
         <link rel='stylesheet' href = "../css/style.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
 
     <body>
         <header>
             <h2 class="logo">Arboricide</h2>
             <nav class="navigation">
-                <a href="#">Log in</a>
+                <button class="btnLogin-popup">Log in</button>
             </nav>
 
         </header>
+
 
         <section class="parallax">
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200918936934428732/hill1.png?ex=65c7edea&is=65b578ea&hm=e26395b3f27d40f5ee6a966478b2c003deaff9884a1d0b0501144e5b9fef4e2b&=&format=webp&quality=lossless&width=1014&height=570" id="hill1">
@@ -25,10 +27,76 @@
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200919422584488036/hill4.png?ex=65c7ee5e&is=65b5795e&hm=20d611898525cdcec219d9638f62cb5830893cf7569c5fed7357bc28f62a7381&=&format=webp&quality=lossless&width=1014&height=570" id="hill4">
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200919509297541252/hill5.png?ex=65c7ee73&is=65b57973&hm=6229f0852284f75b09ebba3393aa9e73f743ee4137f11e1be2a05822510242a1&=&format=webp&quality=lossless&width=1014&height=570" id="hill5">
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200919627241373696/tree.png?ex=65c7ee8f&is=65b5798f&hm=d5ddf42c3eda174c5d9481816ba03a5c4aa05de1d1bfe33842c1849ac0dd0ffe&=&format=webp&quality=lossless&width=1014&height=570" id="tree">
-            <h2 id="text">Arboricide Analytics</h2>
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200919710200516648/leaf.png?ex=65c7eea2&is=65b579a2&hm=1726da54e0da3bcac9d0a9296f8634d92088fd37fcd4a7b967ddb179dda6ad69&=&format=webp&quality=lossless&width=1014&height=570" id="leaf">
+            <h2 id="text">Arboricide Analytics</h2>
             <img src="https://media.discordapp.net/attachments/1175549192106672240/1200919801816678490/plant.png?ex=65c7eeb8&is=65b579b8&hm=7418ea79d03199c9b23fce6f13bc1efeaa537dcee06f35ed94fb0165f77a6ce5&=&format=webp&quality=lossless&width=1000&height=570" id="plant">
+            
+
+            <div class="wrapper">
+                <div class="wrapper2"><i class="material-icons">close</i> </div>
+                
+                <div class="form-box login">
+                    <h3>Log in</h3>
+                    <form action="#">
+                        <div class="input-box">
+                            <i class="material-icons">mail</i>
+                            <input type="text" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <i class="material-icons">lock</i>
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <div class="remember">
+                            <label><input type="checkbox"> 
+                            Remember me</label>
+                        </div>
+                        <button type="submit" class="btn">Log in</button>
+                        <div class="login-register">
+                            <p>Don't have an account with us?
+                              <a href="#" class="register-link">Register</a>  
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="form-box register">
+                    <h3>Registration</h3>
+                    <form action="#">
+                        <div class="input-box">
+                            <i class="material-icons">person</i>
+                            <input type="text" required>
+                            <label>Username</label>
+                        </div>
+                        <div class="input-box">
+                            <i class="material-icons">mail</i>
+                            <input type="text" required>
+                            <label>Email</label>
+                        </div>
+                        <div class="input-box">
+                            <i class="material-icons">lock</i>
+                            <input type="password" required>
+                            <label>Password</label>
+                        </div>
+                        <div class="remember">
+                            <label><input type="checkbox"> 
+                            I consent to make an account</label>
+                        </div>
+                        <button type="submit" class="btn">Register</button>
+                        <div class="login-register">
+                            <p>Already have an account?
+                              <a href="#" class="login-link">Login</a>  
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        
+        
         </section>
+
+       
 
         <section class="sec">
             <h2>How many trees are you killing?</h2>
@@ -38,7 +106,7 @@
             </p>
         </section>
 
-
+        
         <script src="../js/script.js"></script>
 
 
