@@ -8,8 +8,10 @@ class User(db.Model):
     name = db.Column(db.String(100))
     password = db.Column(db.String(100))
     device_id = db.Column(db.String(100))
-    time = db.Column(db.DateTime)
+    time = db.Column(db.String(100))
     energy = db.Column(db.Float)
+    trees_killed = db.Column(db.Float)
+    cost = db.Column(db.Float)
 
 # timestamp, kWHours, treesKilled, costDollars, userId (device id)
 class ConsumptionInfo():

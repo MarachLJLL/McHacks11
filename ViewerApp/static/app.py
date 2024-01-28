@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, json, json
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, User
 import jsonify
+from dataExtraction import getDevices
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -46,8 +47,6 @@ with app.app_context():
         username = request.args.get("username")
         password = request.args.get("password")
         user = User.query.filter_by(name=username, password=password).first()
-        print(username)
-        print(password)
         if user:
             return '', 200
         else: 
@@ -82,6 +81,29 @@ with app.app_context():
         data = request.get_json()
 
         return '', 201
+    
+    @app.route("/create")
+    def create():
+        return render_template("createUser.html")
+    @app.route("/submit", methods = ["GET", "POST"])
+    def submit():
+        name = request.form['name']
+        password = request.form['password']
+        device_id = request.form['device_id']
+        time = request.form['time']
+        energy = float(request.form['energy'])
+        trees_killed = int(request.form['trees_killed'])
+        cost = float(request.form['cost'])
+
+        # Create a new User instance
+        new_user = User(name=name, password=password, device_id=device_id, time=time,
+                        energy=energy, trees_killed=trees_killed, cost=cost)
+
+        # Add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+  
+        return render_template("users.html")
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)
