@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from classes import db, User
 import jsonify
 from dataExtraction import getDevices
+from graphing import Graph
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -104,6 +105,10 @@ with app.app_context():
         db.session.commit()
   
         return render_template("users.html")
+    @app.route("/graph")
+    def graph():
+        g = Graph(session["name"])
+        return g.kwh_g
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)
