@@ -15,6 +15,10 @@
             --secondaryColor: #f9f9f9; /* Light grey, used in topbar */
             --tertiaryColor: #ff6347; /* Tomato color, can be used for highlights or accents */
         }
+        body {
+            background-color: #359381; /* Light grey background */
+            /* ... other styles ... */
+        }
 
         * {
             margin: 0;
@@ -70,19 +74,6 @@
         <div class="main"></div>
     </div>
     <div class="graph">{{ graph_html|safe }}</div>
-    <table border="1">
-        <tr>
-            <th>kWh</th>
-            <th>Trees Killed</th>
-            <th>Cost</th>
-            <!-- Add more columns as needed -->
-        </tr>
-            <td>${{ g.kwh_t|round(2) }}</td>
-            <td>${{ g.treesKilled_t|round(2) }}</td>
-            <td>${{ g.cost_t|round(2) }}</td>
-            <!-- Add more columns as needed -->
-            
-    </table>
     
 </body>
 </html>
