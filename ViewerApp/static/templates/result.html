@@ -108,7 +108,7 @@
                 <div class="cards">
                     <div class="card">
                         <div class="card-content">
-                            <div class="number">xyz</div>
+                            <div class="number">{{ g.kwh_t|round(2) }}</div>
                             <div class="card-name">KiloWatts/hour</div>
                         </div>
                         <div class="icon-box">
@@ -119,7 +119,7 @@
                 <div class="cards">
                     <div class="card">
                         <div class="card-content">
-                            <div class="number">xyz</div>
+                            <div class="number">{{ g.treesKilled_t|round(2) }}</div>
                             <div class="card-name">Trees Killed</div>
                         </div>
                         <div class="icon-box">
@@ -130,7 +130,7 @@
                 <div class="cards">
                     <div class="card">
                         <div class="card-content">
-                            <div class="number">xyz</div>
+                            <div class="number">${{ g.cost_t|round(2) }}</div>
                             <div class="card-name">Cost</div>
                         </div>
                         <div class="icon-box">

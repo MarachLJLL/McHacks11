@@ -177,8 +177,7 @@ with app.app_context():
     @app.route("/result")
     def result():
         g = Graph(session["name"])
-        graph_html = g.kwh_g
-        return render_template('result.html')
+        return render_template('result.html', g = g)
 
     if __name__ == '__main__':
             db.create_all() 
