@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, User
-import jsonify
 from dataExtraction import getDevices
 from graphing import Graph
 app = Flask(__name__)
@@ -109,6 +108,18 @@ with app.app_context():
     def graph():
         g = Graph(session["name"])
         return g.kwh_g
+    @app.route("/show")
+    def route():
+        
+
+
+
+
+
+
+
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)
+    
+    

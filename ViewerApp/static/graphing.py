@@ -35,11 +35,17 @@ class Graph():
             ylist = []
             i = 0
             for ci in ci_list:
+                ylist.append(func(ci)) 
+                """
+                print(ci.time)
+                print(self.timeslots[i])
+
                 while ci.time != self.timeslots[i]:
                     ylist.append(None)
                     i += 1
-                ylist.append(func(ci))            
+                           
                 i += 1
+                """
             data.append(go.Scatter(x=self.timeslots, y=ylist, mode='lines', name=device))
         fig = go.Figure(data=data)
         fig.update_layout(title='Plotly Time Series Example', xaxis_title='Time', yaxis_title=value_name)
