@@ -50,17 +50,19 @@ def get_credentials():
 if __name__ == "__main__":
     baseurl = "http://127.0.0.1:5000/"
     logged_in = False
-
+    username = ''
     while not logged_in:
         username, password = get_credentials()
         path = "login-app?username=" + username + "&password=" + password
         
         responce = requests.get(baseurl + path)
         if responce.status_code == 200:
+            print ('success!')
             logged_in = True
         
     while True:
         data = getData()
+        data['user'] = username
         path = "create-dp"
         responce = requests.post(baseurl + path, json=data)
         time.sleep(5)

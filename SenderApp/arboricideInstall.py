@@ -44,7 +44,7 @@ def install_energy_tracker():
 
     timestamp=`date -u +"%Y-%m-%dT%H:%M:%SZ"`
 
-    echo "$timestamp,$kilowattHours,$treesKilled,$costDollars,$userId" >> "$TRACKER_DIR/$TRACKER_FILE"
+    echo "$timestamp,$kilowattHours,$treesKilled,$costDollars,$userId" > "$TRACKER_DIR/$TRACKER_FILE"
     """
 
     cron_script_content = """

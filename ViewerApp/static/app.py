@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
 db.init_app(app)
 app.secret_key = 'ilsr' 
+app.config['SESSION_TYPE'] = 'filesystem'
 
 with app.app_context():
     @app.route('/')
@@ -80,21 +81,28 @@ with app.app_context():
     def create_dp():
         # if request.method == "POST":
         data = request.get_json()
-        print(session['name'])
-        name = session['name']
+        name = data['user']
         time = data['time']
         energy = data['energy']
         killed = data['killed']
         cost = data['cost']
         device_id = data['device_id']
         
+        users = User.query.all()
+        for user in users:
+            if user.name == name and user.time == time:
+                print('datapoint found already')
+                return '', 201
+
         new_user = User(name=name, device_id=device_id, time=time,
                         energy=energy, trees_killed=killed, cost=cost)
 
         # Add the new user to the database
         db.session.add(new_user)
+        print("added user!")
         db.session.commit()
         return '', 201
+        
     
     @app.route("/create")
     def create():
@@ -127,13 +135,6 @@ with app.app_context():
         users = User.query.all()
         
         return render_template("/show.html", users = users)
-
-
-
-
-
-
-
 
     if __name__ == '__main__':
             db.create_all() 
