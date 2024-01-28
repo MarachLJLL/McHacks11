@@ -34,18 +34,14 @@ class Graph():
             ci_list = self.devices[device]
             ylist = []
             i = 0
-            for ci in ci_list:
-                ylist.append(func(ci)) 
-                """
-                print(ci.time)
-                print(self.timeslots[i])
-
-                while ci.time != self.timeslots[i]:
-                    ylist.append(None)
-                    i += 1
-                           
-                i += 1
-                """
+            for time in self.timeslots:
+                appended = False
+                for ci in ci_list:
+                    if ci.time == time:
+                        ylist.append(func(ci)) 
+                        appended = True
+                if not appended:
+                    ylist.append(None)                   
             data.append(go.Scatter(x=self.timeslots, y=ylist, mode='lines', name=device))
         fig = go.Figure(data=data)
         fig.update_layout(title='', xaxis_title='Time', yaxis_title=value_name)
