@@ -136,7 +136,6 @@ with app.app_context():
     def graph():
         g = Graph(session["name"])
         graph_html = g.kwh_g
-
         return render_template('graphing.html', graph_html=graph_html, g = g)
     
     @app.route("/stats")
