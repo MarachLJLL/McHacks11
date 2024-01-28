@@ -89,7 +89,7 @@ with app.app_context():
         session.pop('name', None)
         return "Logged out, session ended."
 
-    @app.route("/create-dp", methods=["POST"])
+    @app.route("/create-dp", methods=["POST", "GET"])
     def create_dp():
         # if request.method == "POST":
         data = request.get_json()
@@ -113,7 +113,7 @@ with app.app_context():
         db.session.add(new_user)
         print("added user!")
         db.session.commit()
-        return '', 201
+        return redirect("graphing.html")
         
     
     @app.route("/create")
