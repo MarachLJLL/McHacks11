@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+</head>
+<body>
+
+<h2>User Form</h2>
+
+<form action="/submit" method="post">
+    <!-- Name Input -->
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <!-- Password Input -->
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <!-- Device ID Input -->
+    <label for="device_id">Device ID:</label>
+    <input type="text" id="device_id" name="device_id" required>
+    <br>
+
+    <!-- Time Input -->
+    <label for="time">Time:</label>
+    <input type="text" id="time" name="time" required>
+    <br>
+
+    <!-- Energy Input -->
+    <label for="energy">Energy:</label>
+    <input type="number" id="energy" name="energy" required>
+    <br>
+
+    <!-- Trees Killed Input -->
+    <label for="trees_killed">Trees Killed:</label>
+    <input type="number" id="trees_killed" name="trees_killed" required>
+    <br>
+
+    <!-- Cost Input -->
+    <label for="cost">Cost:</label>
+    <input type="number" id="cost" name="cost" required>
+    <br>
+
+    <!-- Submit Button -->
+    <input type="submit" value="Create">
+</form>
+
+</body>
+</html>
