@@ -24,7 +24,7 @@ with app.app_context():
             g = Graph(session["name"])
             graph_html = g.kwh_g
 
-            return render_template('graphing.html', graph_html=graph_html, g = g)
+            return render_template('result.html', graph_html=graph_html, g = g)
         else:
             return render_template('index.html')
 
@@ -48,7 +48,7 @@ with app.app_context():
             g = Graph(session["name"])
             graph_html = g.kwh_g
 
-            return render_template('graphing.html', graph_html=graph_html, g = g)
+            return render_template('result.html', graph_html=graph_html, g = g)
         else:
             error = "Username already exists please try again."
             return render_template("index.html", error = error)
@@ -77,7 +77,7 @@ with app.app_context():
                 g = Graph(session["name"])
                 graph_html = g.kwh_g
 
-                return render_template('graphing.html', graph_html=graph_html, g = g)
+                return render_template('result.html', graph_html=graph_html, g = g)
             else:
                 error = "Invalid username or password. Please try again."
                 return render_template('index.html', error=error)
