@@ -174,9 +174,10 @@ with app.app_context():
         response = send_file(memory_file, mimetype='application/zip', as_attachment=True, download_name='SenderApp.zip')
         return response
 
-
-        """path_to_file = 'C:\\Users\\llimge\\Documents\\Mcgill Classes\\McHA 024\\McHacks11\\SenderApp'  # Replace with your file's path
-        return send_file(path_to_file, as_attachment=True)"""
+    @app.route("/result")
+    def result():
+        g = Graph(session["name"])
+        return render_template("/result.html", g = g)
 
     if __name__ == '__main__':
             db.create_all() 
