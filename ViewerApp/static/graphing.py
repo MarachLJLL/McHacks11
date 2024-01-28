@@ -1,56 +1,56 @@
 from datetime import datetime, timedelta
 import plotly.graph_objects as go
+from collections import Counter
+from dataExtraction import getDevices
+from plotly.offline import plot
+from flask import Flask, render_template
 
-def getGraphHtml(user):
-    devices = getDeviceIDs(user)
-    times_lists = []
-    energy_lists = []
-    for device in devices:
-        times_lists.append(getTimes(device))
+class Graph():
+    def __init__(self, user):
+        self.devices = getDevices(user)
+        self.timeslots = []
+        for key in self.devices:
+            self.devices[key].sort(key=lambda x: x.time)
+            for ci in self.devices[key]:
+                self.timeslots.append(ci.time)
+        self.timeslots = Counter(self.timeslots)
+        self.timeslots = self.timeslots.keys()
+        self.timeslots.sort() # all unique timeslots for x axis
+
+
+        self.kwh_g = self.generate_graph(lambda x: x.kwh, "kWh")
+        self.treesKilled_g = self.generate_graph(lambda x: x.treesKilled, "Trees Killed")
+        self.cost_g = self.generate_graph(lambda x: x.cost, "Cost in Dollars")
+
+        self.kwh_t = self.getTotal(lambda x: x.kwh)
+        self.treesKilled_t = self.getTotal(lambda x: x.treesKilled)
+        self.cost_t = self.getTotal(lambda x: x.cost)
+
+
+        self.num_trees_killed = self.getKilledTrees()
+        
+    def generate_graph(self, func, value_name):
+        data = []
+        for device in self.devices:
+            ci_list = self.devices[device]
+            ylist = []
+            i = 0
+            for ci in ci_list:
+                while ci.time != self.timeslots[i]:
+                    ylist.append(None)
+                    i += 1
+                ylist.append(func(ci))            
+                i += 1
+            data.append(go.Scatter(x=self.timeslots, y=ylist, mode='lines', name=device))
+        fig = go.Figure(data=data)
+        fig.update_layout(title='Plotly Time Series Example', xaxis_title='Time', yaxis_title=value_name)
+        graph_html = plot(fig, output_type='div', include_plotlyjs=False)
+
+        return render_template('graphing.html', graph_html=graph_html)
     
-    min_time =  times_lists[0][0]
-    max_time = times_lists[0][len(times_lists[0]) - 1]
-    for times in times_lists:
-        min_time = min(min_time, times[0])
-        max_time = max(max_time, times[len(times) - 1])
-    
-    energy_lists.append(getTimes(device))
-
-    current_time =  min_time
-    time_intervals = []
-    while current_time < max_time:
-        time_intervals.append(current_time)
-        current_time += timedelta(minutes=5)
-
-    
-  
-    
-def index():
-    # Times for the x-axis
-    times = [
-        datetime(2021, 1, 1, 9, 0),  # 9:00 AM
-        datetime(2021, 1, 1, 10, 0), # 10:00 AM
-        datetime(2021, 1, 1, 11, 0), # 11:00 AM
-        datetime(2021, 1, 1, 12, 0), # 12:00 PM
-        datetime(2021, 1, 1, 13, 0)  # 1:00 PM
-    ]
-
-    # Y-axis values
-    y1 = [2, 3, 4, 5, 6]
-    y2 = [1, 4, 7, 10, 13]
-
-    trace1 = go.Scatter(x=times, y=y1, mode='lines', name='First Line')
-    trace2 = go.Scatter(x=times, y=y2, mode='lines', name='Second Line')
-
-    fig = go.Figure(data=[trace1, trace2])
-    fig.update_layout(title='Plotly Time Series Example',
-                      xaxis_title='Time',
-                      yaxis_title='Values')
-
-    # Convert the figures to HTML
-    graph_html = plot(fig, output_type='div', include_plotlyjs=False)
-
-    return render_template('graphing.html', graph_html=graph_html)
-
-if __name__ == '__main__':
-    
+    def getTotal(self, func):
+        total = 0
+        for device in self.devices:
+            for ci in self.devices[device]:
+                total += func(ci)
+        return total
