@@ -14,7 +14,7 @@ with app.app_context():
         logged_in = session.get('logged_in', False)
         if logged_in:
             users = User.query.all()
-            return render_template('test.html', users = users)
+            return render_template('index.html', users = users)
         else:
             return render_template('index.html')
 
