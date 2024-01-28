@@ -46,10 +46,7 @@ def getGraphHtml(user):
         current_time += timedelta(minutes=5)
 
     
-
-
-
-    
+  
     
 def index():
     # Times for the x-axis
@@ -79,4 +76,4 @@ def index():
     return render_template('graphing.html', graph_html=graph_html)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    
