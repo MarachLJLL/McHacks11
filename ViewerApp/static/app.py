@@ -1,8 +1,14 @@
-from flask import Flask, render_template, request, redirect, session, json, jsonify
+from flask import Flask, render_template, request, redirect, session, json, jsonify, send_file
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, User
 from dataExtraction import getDevices
 from graphing import Graph
+import os
+from zipfile import ZipFile
+import io
+
+
+
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -147,6 +153,30 @@ with app.app_context():
     def route():
         users = User.query.all()
         return render_template("/show.html", users = users)
+
+    @app.route("/download_page")
+    def download_page():
+        return render_template("downloadPage.html")
+
+    @app.route("/download")
+    def download_file():
+        directory_path = 'C:\\Users\\llimge\\Documents\\Mcgill Classes\\McHA 024\\McHacks11\\SenderApp'  # Path to your folder
+        memory_file = io.BytesIO()
+
+        with ZipFile(memory_file, 'w') as zf:
+            for root, dirs, files in os.walk(directory_path):
+                for file in files:
+                    filepath = os.path.join(root, file)
+                    zf.write(filepath, os.path.relpath(filepath, directory_path))
+        memory_file.seek(0)
+
+        # Set the proper headers and MIME type for a zip file download
+        response = send_file(memory_file, mimetype='application/zip', as_attachment=True, download_name='SenderApp.zip')
+        return response
+
+
+        """path_to_file = 'C:\\Users\\llimge\\Documents\\Mcgill Classes\\McHA 024\\McHacks11\\SenderApp'  # Replace with your file's path
+        return send_file(path_to_file, as_attachment=True)"""
 
     if __name__ == '__main__':
             db.create_all() 
