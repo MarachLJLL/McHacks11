@@ -110,7 +110,10 @@ with app.app_context():
         return g.kwh_g
     @app.route("/show")
     def route():
+        users = User.query.all()
         
+        return render_template("/show.html", users = users)
+
 
 
 

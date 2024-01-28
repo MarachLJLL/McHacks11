@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Users</title>
+</head>
+<body>
+    <h1>User Database</h1>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Password</th>
+            <!-- Add more columns as needed -->
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.device_id }}</td>
+                <td>{{ user.time }}</td>
+                <td>{{ user.energy }}</td>
+                <td>{{ user.trees_killed }}</td>
+                <td>{{ user.cost }}</td>
+                <!-- Add more columns as needed -->
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

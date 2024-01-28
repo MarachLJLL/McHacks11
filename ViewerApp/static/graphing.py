@@ -48,7 +48,7 @@ class Graph():
                 """
             data.append(go.Scatter(x=self.timeslots, y=ylist, mode='lines', name=device))
         fig = go.Figure(data=data)
-        fig.update_layout(title='Plotly Time Series Example', xaxis_title='Time', yaxis_title=value_name)
+        fig.update_layout(title='', xaxis_title='Time', yaxis_title=value_name)
         graph_html = plot(fig, output_type='div', include_plotlyjs=False)
 
         return render_template('graphing.html', graph_html=graph_html)
