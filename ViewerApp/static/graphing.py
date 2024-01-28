@@ -1,8 +1,20 @@
 from datetime import datetime, timedelta
+import plotly.graph_objects as go
 
 def getDevices(user):
     devicesList = []
+    # get all entries for this user
+    # have a Counter() for all of the devices
+    # set devicesList to the keys of the Counter()
     return devicesList
+
+def convertTimeToDatetime(str):
+    year = 1
+    month = 1
+    day =  1
+    hour = 1
+    minute = 1
+    return datetime(year=year, month=month, day=day, hour=hour, minute=minute)
 
 def getTimes(device):
     times_list = []
@@ -13,22 +25,27 @@ def getEnergies(device):
     return energies_list
 
 def getGraphHtml(user):
-    devices = getDevices(user)
+    devices = getDeviceIDs(user)
     times_lists = []
     energy_lists = []
-    getTimes(device)
-
+    for device in devices:
+        times_lists.append(getTimes(device))
+    
     min_time =  times_lists[0][0]
     max_time = times_lists[0][len(times_lists[0]) - 1]
     for times in times_lists:
         min_time = min(min_time, times[0])
         max_time = max(max_time, times[len(times) - 1])
     
+    energy_lists.append(getTimes(device))
+
     current_time =  min_time
     time_intervals = []
     while current_time < max_time:
         time_intervals.append(current_time)
         current_time += timedelta(minutes=5)
+
+    
 
 
 
