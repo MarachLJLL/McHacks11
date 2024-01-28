@@ -13,9 +13,10 @@ def getDevices(user):
     users = User.query.filter_by(name=user).all()
 
     for user in users:
-        time = convertTimeToDatetime(user.time)
-        info = ConsumptionInfo(time, user.energy, user.trees_killed, user.cost)
-        devices[user.device_id].append(info)
+        if (user.time != None):
+            time = convertTimeToDatetime(user.time)
+            info = ConsumptionInfo(time, user.energy, user.trees_killed, user.cost)
+            devices[user.device_id].append(info)
 
     # get all entries for this user
     # have a Counter() for all of the devices

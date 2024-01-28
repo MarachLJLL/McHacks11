@@ -10,11 +10,12 @@ class Graph():
         self.devices = getDevices(user)
         self.timeslots = []
         for key in self.devices:
-            self.devices[key].sort(key=lambda x: x.time)
+            self.devices[key] = sorted(self.devices[key],key=lambda x: x.time)
             for ci in self.devices[key]:
                 self.timeslots.append(ci.time)
         self.timeslots = Counter(self.timeslots)
-        self.timeslots = self.timeslots.keys()
+        self.timeslots = list(self.timeslots.keys())
+     
         self.timeslots.sort() # all unique timeslots for x axis
 
 
@@ -26,8 +27,6 @@ class Graph():
         self.treesKilled_t = self.getTotal(lambda x: x.treesKilled)
         self.cost_t = self.getTotal(lambda x: x.cost)
 
-
-        self.num_trees_killed = self.getKilledTrees()
         
     def generate_graph(self, func, value_name):
         data = []
