@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, session, json, json
 from flask_sqlalchemy import SQLAlchemy
 from classes import db, User
 import jsonify
+from dataExtraction import getDevices
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -101,6 +102,7 @@ with app.app_context():
         # Add the new user to the database
         db.session.add(new_user)
         db.session.commit()
+  
         return render_template("users.html")
     if __name__ == '__main__':
             db.create_all() 

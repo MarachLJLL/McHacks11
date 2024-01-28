@@ -1,6 +1,7 @@
-from classes import db, User
+from classes import db, User, ConsumptionInfo
 from collections import defaultdict
 from datetime import datetime
+from flask import current_app
 
 def getDevices(user):
     """
@@ -9,14 +10,12 @@ def getDevices(user):
     }
     """
     devices = defaultdict(list)
-
     users = User.query.filter_by(name=user).all()
 
     for user in users:
         time = convertTimeToDatetime(user.time)
-        info = ConsumptionInfo(time, user.energy, user.treesKilled, user.cost)
+        info = ConsumptionInfo(time, user.energy, user.trees_killed, user.cost)
         devices[user.device_id].append(info)
-
 
     # get all entries for this user
     # have a Counter() for all of the devices
@@ -31,6 +30,3 @@ def convertTimeToDatetime(time):
     hour = timestamp.hour
     minute = timestamp.minute
     return datetime(year=year, month=month, day=day, hour=hour, minute=minute)
-
-
-print(getDevices("Isaac"))
