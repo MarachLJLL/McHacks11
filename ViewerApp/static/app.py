@@ -63,6 +63,7 @@ with app.app_context():
             if user:
                 session['name'] = username
                 session['logged_in'] = True
+                print(session['name'])
                 return render_template('index.html', username = session['name'])
             else:
                 error = "Invalid username or password. Please try again."
@@ -79,7 +80,20 @@ with app.app_context():
     def create_dp():
         # if request.method == "POST":
         data = request.get_json()
+        print(session['name'])
+        name = session['name']
+        time = data['time']
+        energy = data['energy']
+        killed = data['killed']
+        cost = data['cost']
+        device_id = data['device_id']
+        
+        new_user = User(name=name, device_id=device_id, time=time,
+                        energy=energy, trees_killed=killed, cost=cost)
 
+        # Add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
         return '', 201
     
     @app.route("/create")

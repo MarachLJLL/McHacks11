@@ -3,15 +3,35 @@ from datetime import datetime
 import tkinter as tk
 from tkinter import simpledialog
 import time
+import csv
+import os
 
-def calcEnergy():
-    return 9001
 
 def getData():
-    # only get data if certain conditions are met (charging)
+    csv_file_path = '~/Library/Caches/energy-tracker/energy-log.txt'
+
+    # Expand the tilde to the user's home directory
+    expanded_path = os.path.expanduser(csv_file_path)
+
+    # Check if the file exists
+    if os.path.exists(expanded_path):
+        # Open the CSV file
+        with open(expanded_path, 'r') as csv_file:
+            # Rest of your code to read the CSV file
+            csv_reader = csv.reader(csv_file)
+            values_list = []
+            for row in csv_reader:
+                for value in row:
+                    values_list.append(value)
+
+    else:
+        print(f"The file {expanded_path} does not exist.")
     return {
-        "energy": calcEnergy(),
-        "time": datetime.now().isoformat(),
+        "time" : values_list[0],
+        "energy": values_list[1],
+        "killed": values_list[2],
+        "cost": values_list[3],
+        "device_id": values_list[4]
     }
 
 def get_credentials():
@@ -43,4 +63,4 @@ if __name__ == "__main__":
         data = getData()
         path = "create-dp"
         responce = requests.post(baseurl + path, json=data)
-        time.sleep(5 * 60)
+        time.sleep(5)
