@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, redirect, session, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from classes import db, User, DP
-import jsonify
+from classes import db, User
+from dataExtraction import getDevices
+from graphing import Graph
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'  
@@ -14,7 +15,7 @@ with app.app_context():
         logged_in = session.get('logged_in', False)
         if logged_in:
             users = User.query.all()
-            return render_template('test.html', users = users)
+            return render_template('index.html', users = users)
         else:
             return render_template('index.html')
 
@@ -46,8 +47,6 @@ with app.app_context():
         username = request.args.get("username")
         password = request.args.get("password")
         user = User.query.filter_by(name=username, password=password).first()
-        print(username)
-        print(password)
         if user:
             return '', 200
         else: 
@@ -82,6 +81,48 @@ with app.app_context():
         data = request.get_json()
 
         return '', 201
+    
+    @app.route("/create")
+    def create():
+        return render_template("createUser.html")
+    @app.route("/submit", methods = ["GET", "POST"])
+    def submit():
+        name = request.form['name']
+        password = request.form['password']
+        device_id = request.form['device_id']
+        time = request.form['time']
+        energy = float(request.form['energy'])
+        trees_killed = int(request.form['trees_killed'])
+        cost = float(request.form['cost'])
+
+        # Create a new User instance
+        new_user = User(name=name, password=password, device_id=device_id, time=time,
+                        energy=energy, trees_killed=trees_killed, cost=cost)
+
+        # Add the new user to the database
+        db.session.add(new_user)
+        db.session.commit()
+  
+        return render_template("users.html")
+    @app.route("/graph")
+    def graph():
+        g = Graph(session["name"])
+        return g.kwh_g
+    @app.route("/show")
+    def route():
+        users = User.query.all()
+        
+        return render_template("/show.html", users = users)
+
+
+
+
+
+
+
+
     if __name__ == '__main__':
             db.create_all() 
             app.run(debug=True)
+    
+    
