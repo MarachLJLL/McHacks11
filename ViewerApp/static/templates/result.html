@@ -24,11 +24,28 @@
             background: #f9f9f9;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.08);
             width: 100%;
+            height: 80px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: 2fr 10fr 0.4fr 1fr;
             align-items: center;
             z-index: 1;
+        }
+
+        .logo h2{
+            font-size:2.5em;
+            color: #359381;
+            pointer-events: none;
+            margin-right: 450px; 
+        }
+
+        .sidebar{
+            position: fixed;
+            top: 80px;
+            width: 260px;
+            height: calc(100% - 80px);
+            background: #359381;
+
         }
 
 
@@ -44,6 +61,15 @@
                 <div class="logo">
                     <h2>Arboricide</h2>
                 </div>
+            </div>
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <div>Graph</div>
+                        </a>
+                    </li>
+                </ul>
             </div>
             <div class="main"></div>
         </div>
