@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Plotly Graph in Flask</title>
+    <title>Analyzing Arborial Impact</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 <body>
@@ -15,7 +15,7 @@
         </tr>
             <td>{{ g.kwh_t }}</td>
             <td>{{ g.treesKilled_t }}</td>
-            <td>${{ g.cost_t }}</td>
+            <td>${{ g.cost_t|round(2) }}</td>
             <!-- Add more columns as needed -->
 
     </table>
