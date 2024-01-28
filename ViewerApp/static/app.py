@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, json, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from classes import db, User, DP
+from classes import db, User
 import jsonify
 app = Flask(__name__)
 
