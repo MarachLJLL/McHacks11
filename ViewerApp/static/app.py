@@ -38,10 +38,10 @@ with app.app_context():
             session['logged_in'] = True
      
             users = User.query.all()
-            return render_template("users.html", username = name, users = users)
+            return redirect('index.html')
         else:
             error = "Username already exists please try again."
-            return render_template("signup.html", error = error)
+            return render_template("index.html", error = error)
     @app.route('/login-app', methods=['GET', 'POST'])
     def verify():
         
@@ -65,7 +65,7 @@ with app.app_context():
                 session['name'] = username
                 session['logged_in'] = True
                 print(session['name'])
-                return render_template('index.html', username = session['name'])
+                return redirect("index.html"))
             else:
                 error = "Invalid username or password. Please try again."
                 return render_template('login.html', error=error)
